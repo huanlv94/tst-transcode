@@ -71,13 +71,32 @@ movie.transcode("tmp/movie.mp4") # Default ffmpeg settings for mp4 format
 Keep track of progress with an optional block.
 
 ``` ruby
-movie.transcode("movie.mp4") { |progress| puts progress } # 0.2 ... 0.5 ... 1.0
+movie.transcode("movie.mp4") { |progress| p progress } # 0.2 ... 0.5 ... 1.0
 ```
 
 Give custom command line options with an array.
 
 ``` ruby
 movie.transcode("movie.mp4", %w(-ac aac -vc libx264 -ac 2 ...))
+```
+
+Transcoding with HLS
+
+``` ruby
+movie.transcode("movie.m3u8", %w(-profile:v baseline -level 3.0 -start_number 0 -hls_time 10 -hls_list_size 0 -f hls)) { |progress| p progress }
+```
+
+Transcoding with HLS and using option
+
+``` ruby
+options = {
+  video_codec: "libx264", frame_rate: 10, resolution: "320x240", video_bitrate: 300, video_bitrate_tolerance: 100,
+  aspect: 1.333333, keyframe_interval: 90, x264_vprofile: "high", x264_preset: "slow",
+  audio_codec: "libfaac", audio_bitrate: 32, audio_sample_rate: 22050, audio_channels: 1,
+  threads: 2, custom: %w(-profile:v baseline -level 3.0 -start_number 0 -hls_time 10 -hls_list_size 0 -f hls))
+}
+
+movie.transcode("movie.m3u8", options) { |progress| p progress }
 ```
 
 Use the EncodingOptions parser for humanly readable transcoding options. Below you'll find most of the supported options.

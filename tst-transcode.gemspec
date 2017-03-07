@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = FFMPEG::VERSION
   s.authors     = ["HuanLV AB"]
   s.email       = ["huanlv@topica.edu.vn", "lehuan94cntt@gmail.com"]
-  s.homepage    = "http://github.com/lehuan94cntt/"
+  s.homepage    = "https://github.com/lehuan94cntt/tst-transcode"
   s.summary     = "Wraps ffmpeg to read metadata and transcodes videos."
 
   s.add_dependency('multi_json', '~> 1.8')
